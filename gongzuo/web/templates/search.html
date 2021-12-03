@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block body %}
+<div>
+  <p class="lead">{{job_count}} Jobs</p>
+  <form action="/jobs/search" method="get">
+    <label for="Job">Job</label>
+    <input name="job" maxlength="50" style="width: 100px; margin-right: 10px;"
+      value="{{job if job else ''}}"></input>
+    <label for="Company">Company</label>
+    <input name="company" maxlength="50" style="width: 100px; margin-right: 10px;"
+      value="{{company if company else ''}}"></input>
+    <label for="StartDate">Start Date</label>
+    <input name="start_date" style="width: 100px; margin-right: 10px;"
+      value="{{start_date if start_date else ''}}"></input>
+    <label for="EndDate">End Date</label>
+    <input name="end_date" style="width: 100px; margin-right: 10px;"
+      value="{{end_date if end_date else ''}}"></input>
+    <button type="submit" class="btn btn-xs btn-default" style="height: 25px">Submit</button>
+  </form>
+  <table class="table table-condensed table-striped" style="width: 100%;">
+      <thead>
+        <th>Job</th>
+        <th>Company</th>
+        <th>Job Description</th>
+        <th>Salary</th>
+        <th>Appear Date</th>
+      </thead>
+      <tbody>
+        {% for job in jobs %}
+        <tr>
+          <td><a href="https://www.104.com.tw/job/{{job.JobId}}">{{job.JobName}}</a></td>
+          <td><a href="https://www.104.com.tw/company/{{job.CompanyId}}">{{job.CompanyName}}</a></td>
+          <td>{{job.JobDescription}}</td>
+          <td>{{job.Salary}}</td>
+          <td>{{job.AppearDate}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+{% endblock %}
